@@ -14,13 +14,13 @@ const auth = (requiredRole: string) => {
         const { email, role, isBlocked,name } = decoded;
 console.log("Name:",name)
         const user = await User.findOne({ email: email });
-        console.log(user,"User")
+        // console.log(user,"User")
 
-        if (user) {
-            req.user = user;
-        } else {
-            throw new Error("You Are Not A Valid User");
-        }
+        // if (user) {
+        //     req.user = user;
+        // } else {
+        //     throw new Error("You Are Not A Valid User");
+        // }
         
         
 

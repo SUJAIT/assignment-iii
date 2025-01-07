@@ -11,7 +11,7 @@ const register = catchAsync(async (req: Request, res: Response) => {
         success: true,
         message: "User registered successfully",
         statusCode: StatusCodes.CREATED,
-        data: result,
+        data: { id: result.id, name: result.name, email: result.email },
     
     })
 })
@@ -23,8 +23,8 @@ const login = catchAsync(async (req: Request, res: Response) => {
         success: true,
         message: "Login successfully",
         statusCode: StatusCodes.OK,
-        data: result.verifiedUser,
-        token:result.token,
+        data: {token:result.token}
+        // token:result.token,
      
     })
 })

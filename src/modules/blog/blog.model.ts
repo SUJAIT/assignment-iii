@@ -6,6 +6,7 @@ const blogSchema = new Schema<TBlog>({
         type: String,
         required: [true, 'First Name is required'],
         trim: true,
+       
     },
     content:{
         type: String,
@@ -13,9 +14,10 @@ const blogSchema = new Schema<TBlog>({
         trim: true,
     },
     author: {
-      type: Schema.Types.ObjectId,
+      type:Schema.Types.ObjectId,
       ref: 'User', // Reference the User model
-    //  required:true
+      unique: true,
+      required: true,
     },
     isPublished:{
         type: Boolean,
@@ -36,5 +38,7 @@ const blogSchema = new Schema<TBlog>({
 {
     timestamps: true,
 })
+
+blogSchema.index({ author: 1 }, { unique: true });
 
 export const Blog = model<TBlog>('Blog',blogSchema)

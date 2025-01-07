@@ -29,10 +29,10 @@ const login = async(payload:ILoginUser)=>{
     //jwt
 
     
-const token = Jwt.sign({id:user?.id,email:user?.email, role:user?.role, isBlocked:user?.isBlocked,name:user?.name}, "secret",{expiresIn:"1d"})
+const token = Jwt.sign({_id:user?.id,email:user?.email, role:user?.role, isBlocked:user?.isBlocked,name:user?.name}, "secret",{expiresIn:"1d"})
 
 console.log(token)
-const verifiedUser = {id:user?.id,name:user?.name,email:user?.email,role:user?.role,isBlocked:user?.isBlocked}
+const verifiedUser = {_id:user?.id,name:user?.name,email:user?.email,role:user?.role,isBlocked:user?.isBlocked}
 
 console.log(verifiedUser,"verifiedUser")
 
