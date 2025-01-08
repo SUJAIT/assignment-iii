@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { NextFunction, Request, Response } from "express"
 import catchAsync from "../../utils/catchAsync"
 import Jwt, { JwtPayload } from 'jsonwebtoken';

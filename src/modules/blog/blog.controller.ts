@@ -25,27 +25,40 @@ console.log(user,"blogU")
 
 const BlogUpdate = catchAsync(async (req:Request,res:Response)=>{
  const {id} = req.params;
- const body = req.body
- const userId = req.user?.id;
- if (!userId) {
-   res.status(401).json({ message: 'Unauthorized: User not found' });
-   return;
- }
- console.log(body,"body")
+ const {title,content,isPublished} = req.body;
+  const body = {title,content,isPublished}
+ const userId = req.user?._id;
+  const blog = await Blog.findById(id)
+
+console.log( userId,"test222")
+  console.log(id,"test0000")
+
+
+  if(!blog){
+    return  sendResponse(res,{
+      statusCode: StatusCodes.OK,
+      success: false,
+      message:"Blog not found",
+      data: "Blog not found"
+  })
+  }
+
+  console.log( blog.author.toString(),"test111")
+  console.log( !req.user,"test222")
+  
+
+  if ( blog.author.toString() !== userId) {
+    return  sendResponse(res,{
+      statusCode: StatusCodes.OK,
+      success: false,
+      message:"You are not authorized to update this blog",
+      data: "data not found"
+  })
+  }
 
  const result = await blogService.BlogUpdate(id,body)
  console.log(result)
 
- const existingBlog = await Blog.findById(id).populate('author', 'details');
- if (!existingBlog) {
-   res.status(404).json({ message: 'Blog not found' });
-   return;
- }
-
- if (existingBlog.author._id.toString() !== userId) {
-   res.status(403).json({ message: 'Forbidden: You are not the author of this blog' });
-   return;
- }
 
  sendResponse(res,{
      statusCode: StatusCodes.OK,

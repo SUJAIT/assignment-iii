@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from "express"
 import catchAsync from "../../utils/catchAsync"
 import Jwt, { JwtPayload } from 'jsonwebtoken';
 import User from "../../modules/user/user.model";
-import { Blog } from "../../modules/blog/blog.model";
+// import { Blog } from "../../modules/blog/blog.model";
 
 
 const authUpdate = (requiredRole: string) => {

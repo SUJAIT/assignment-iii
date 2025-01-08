@@ -31,8 +31,8 @@ console.log(populatedBlog,"ppp")
 return populatedBlog as TBlog;
 }
 
+
 const BlogUpdate = async(id:string,payload:Partial<TBlog>) =>{
- 
     const result =await Blog.findByIdAndUpdate(id,payload ,{ new: true, runValidators: true })
     return result
 }
