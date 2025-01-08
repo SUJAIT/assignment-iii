@@ -37,10 +37,19 @@ const BlogUpdate = async(id:string,payload:Partial<TBlog>) =>{
     return result
 }
 
+const BlogDelete = async(id:string) =>{
+    const result = await Blog.findByIdAndDelete(id)
+    return result
+}
 
-
+const BlogFind = async() =>{
+    const result = await Blog.find()
+    return result
+}
 
 export const blogService = {
     BlogCreate,
-    BlogUpdate
+    BlogUpdate,
+    BlogDelete,
+    BlogFind
 }

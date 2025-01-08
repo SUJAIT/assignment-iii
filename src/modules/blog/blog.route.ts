@@ -10,6 +10,7 @@ blogRouter.post('/',auth("admin"), blogController.BlogCreate)
 blogRouter.patch('/:id',authUpdate("admin"), blogController.BlogUpdate)
 // blogRouter.patch('/:id', blogController.BlogUpdate)
 // blogRouter.patch('/:id',authUpdate("admin"), blogController.BlogUpdate)
+blogRouter.delete('/:id',auth("admin"), blogController.BlogDelete)
 
 export default blogRouter
 

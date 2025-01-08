@@ -30,9 +30,8 @@ const BlogUpdate = catchAsync(async (req:Request,res:Response)=>{
  const userId = req.user?._id;
   const blog = await Blog.findById(id)
 
-console.log( userId,"test222")
-  console.log(id,"test0000")
-
+// console.log( userId,"test222")
+//   console.log(id,"test0000")
 
   if(!blog){
     return  sendResponse(res,{
@@ -70,7 +69,43 @@ console.log( userId,"test222")
  // Ensure the function returns void
 })
 
+const BlogDelete = catchAsync(async (req:Request,res:Response)=>{
+    const {id} = req.params;
+    const userId = req.user?._id;
+     const blog = await Blog.findById(id)
+
+     if(!blog){
+        return  sendResponse(res,{
+          statusCode: StatusCodes.OK,
+          success: false,
+          message:"Blog not found",
+          data: "Blog not found"
+      })
+      }
+
+      if ( blog.author.toString() !== userId) {
+        return  sendResponse(res,{
+          statusCode: StatusCodes.OK,
+          success: false,
+          message:"You are not authorized to update this blog",
+          data: "data not found"
+      })
+      }
+
+    const result = await blogService.BlogDelete(id)
+    sendResponse(res,{
+        statusCode: StatusCodes.OK,
+        success: true,
+        message:"Blog Delete Succesfully",
+        data: result
+    })
+
+})
+
+
+
 export const blogController = {
     BlogCreate,
-    BlogUpdate
+    BlogUpdate,
+    BlogDelete
 }
